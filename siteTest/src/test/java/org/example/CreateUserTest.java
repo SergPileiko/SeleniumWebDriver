@@ -51,17 +51,20 @@ public class CreateUserTest {
         driver.get("https://diary.ru/");
         driver.findElement(By.linkText("Регистрация")).click();
         driver.findElement(By.id("signupform-username")).click();
-        driver.findElement(By.id("signupform-username")).sendKeys("TestTset3");
+        driver.findElement(By.id("signupform-username")).sendKeys("TestTset5");
         driver.findElement(By.id("wrapper")).click();
-        driver.findElement(By.id("signupform-password")).sendKeys("TestTset3");
+        driver.findElement(By.id("signupform-password")).click();
+        driver.findElement(By.id("signupform-password")).clear();
+        driver.findElement(By.id("signupform-password")).sendKeys("TestTset5");
         driver.findElement(By.id("signupform-email")).click();
-        driver.findElement(By.id("signupform-email")).sendKeys("TestTset3@test.com");
+        driver.findElement(By.id("signupform-email")).sendKeys("TestTset5@test.com");
         driver.findElement(By.id("chk_box_user_confirm")).click();
         driver.findElement(By.id("signup_btn")).click();
         driver.findElement(By.cssSelector(".radio:nth-child(4) input")).click();
-        Thread.sleep(10000);
-        driver.findElement(By.name("new-blogs-button")).click();
-        Thread.sleep(10000);
-        assertThat(driver.findElement(By.cssSelector(".block:nth-child(1) > h1")).getText(), is("Популярное"));
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.name("new-blogs-button"))).click();
+        // driver.findElement(By.name("new-blogs-button")).click();
+        assertThat(new WebDriverWait(driver, 10).until(ExpectedConditions
+                .presenceOfElementLocated(By.cssSelector(".block:nth-child(1) > h1"))).getText(), is("Популярное"));
+        // assertThat(driver.findElement(By.cssSelector(".block:nth-child(1) > h1")).getText(), is("Популярное"));
     }
 }

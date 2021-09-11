@@ -55,11 +55,11 @@ public class AuthorizationTest {
         driver.findElement(By.id("loginform-password")).sendKeys("TestTset2");
         driver.findElement(By.id("loginform-rememberme")).click();
         driver.switchTo().frame(0);
-        driver.findElement(By.cssSelector(".recaptcha-checkbox-border")).click();
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".recaptcha-checkbox-border"))).click();
         driver.switchTo().defaultContent();
-        Thread.sleep(10000);
-        driver.findElement(By.id("login_btn")).click();
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.id("login_btn"))).click();
         driver.findElement(By.cssSelector("#wrapper > .container")).click();
-        assertThat(driver.findElement(By.cssSelector(".block:nth-child(1) > h1")).getText(), is("Популярное"));
+        assertThat(new WebDriverWait(driver, 10).until(ExpectedConditions
+                .presenceOfElementLocated(By.cssSelector(".block:nth-child(1) > h1"))).getText(), is("Популярное"));
     }
 }
